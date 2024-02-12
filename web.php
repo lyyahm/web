@@ -1,4 +1,3 @@
- %PDF-1.5 %���� 1 0 obj
 <!DOCTYPE HTML>
 <html>
 <head>

